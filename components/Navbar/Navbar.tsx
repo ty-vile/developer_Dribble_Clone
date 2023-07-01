@@ -4,6 +4,8 @@ import { NavLinks } from "@/constants";
 import AuthProviders from "../Auth/AuthProviders";
 
 function Navbar() {
+  const session = null;
+
   return (
     <nav className="flex items-center justify-between p-4 ">
       <div className="flex flex-1 items-center justify-start gap-10">
@@ -23,6 +25,17 @@ function Navbar() {
             ))}
           </ul>
         </ul>
+      </div>
+
+      <div className="flex items-center justify-center gap-4">
+        {session ? (
+          <>
+            UserPhoto
+            <Link href="/create-project">Share Work</Link>
+          </>
+        ) : (
+          <AuthProviders />
+        )}
       </div>
     </nav>
   );
