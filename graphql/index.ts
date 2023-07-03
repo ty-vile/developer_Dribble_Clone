@@ -5,7 +5,7 @@ query GetUser($email: String!) {
     name
     email
     avatarUrl
-    desription
+    description
     githubUrl
     linkedinUrl
   }
