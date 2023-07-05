@@ -12,7 +12,7 @@ export type Provider = {
 export type Providers = Record<string, Provider>;
 
 export interface SessionInterface extends Session {
-  User: User & {
+  user: User & {
     id: string;
     name: string;
     email: string;
