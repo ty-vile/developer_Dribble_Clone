@@ -6,13 +6,13 @@ import { signOut } from "next-auth/react";
 import { Fragment, useState } from "react";
 import { Menu, Transition } from "@headlessui/react";
 
-import { SessionInterface } from "@/common.types";
+import { SessionInterface } from "@/types";
 
 const ProfileMenu = ({ session }: { session: SessionInterface }) => {
   const [openModal, setOpenModal] = useState(false);
 
   return (
-    <div className="flex flex-col items-center justify-center z-50  relative">
+    <div className="flex flex-col items-center justify-center z-10  relative">
       <Menu as="div">
         <Menu.Button
           className="flex items-center justify-center"
