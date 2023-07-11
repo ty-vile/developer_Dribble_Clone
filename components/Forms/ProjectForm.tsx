@@ -1,24 +1,33 @@
 "use client";
 
 import { SessionInterface } from "@/types";
-import { ChangeEvent } from "react";
+import { ChangeEvent, useState } from "react";
 import Image from "next/image";
 import FormField from "./FormField";
+import { categoryFilters } from "@/constants";
+import CustomMenu from "../CustomMenu";
 
 type ProjectFormProps = {
   type: string;
   session: SessionInterface;
 };
 
-const form = {
-  image: "",
-  title: "",
-};
-
 function ProjectForm({ type, session }: ProjectFormProps) {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [form, setForm] = useState({
+    image: "",
+    title: "",
+    description: "",
+    liveSiteUrl: "",
+    githubUrl: "",
+    category: "",
+  });
+
   const handleSubmit = (e: React.FormEvent) => {};
   const handleChangeImage = (e: ChangeEvent<HTMLInputElement>) => {};
-  const handleStateChange = (fieldName: string, value: string) => {};
+  const handleStateChange = (fieldName: string, value: string) => {
+    setForm((prevState) => ({ ...prevState, [fieldName]: value }));
+  };
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col w-full ">
@@ -48,10 +57,24 @@ function ProjectForm({ type, session }: ProjectFormProps) {
         setState={(value) => handleStateChange("title", value)}
       />
       <FormField
-        title="Title"
-        state={form.title}
+        title="Description"
+        state={form.description}
+        placeholder="Project Description"
+        setState={(value) => handleStateChange("description", value)}
+      />
+      <FormField
+        type="url"
+        title="Website URL"
+        state={form.liveSiteUrl}
         placeholder="Project Name"
-        setState={(value) => handleStateChange("title", value)}
+        setState={(value) => handleStateChange("liveSiteUrl", value)}
+      />
+      <FormField
+        type="url"
+        title="Github URL"
+        state={form.githubUrl}
+        placeholder="Project Name"
+        setState={(value) => handleStateChange("githubUrl", value)}
       />
       <FormField
         title="Title"
@@ -59,18 +82,17 @@ function ProjectForm({ type, session }: ProjectFormProps) {
         placeholder="Project Name"
         setState={(value) => handleStateChange("title", value)}
       />
-      <FormField
-        title="Title"
-        state={form.title}
-        placeholder="Project Name"
-        setState={(value) => handleStateChange("title", value)}
+
+      <CustomMenu
+        title="Category"
+        state={form.category}
+        filters={categoryFilters}
+        setState={(value) => handleStateChange("category", value)}
       />
-      <FormField
-        title="Title"
-        state={form.title}
-        placeholder="Project Name"
-        setState={(value) => handleStateChange("title", value)}
-      />
+
+      <div className="flex items-start w-full">
+        <button>Create</button>
+      </div>
     </form>
   );
 }
