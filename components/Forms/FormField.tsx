@@ -18,8 +18,8 @@ function FormField({
   isTextArea,
 }: FormFieldProps) {
   return (
-    <div className="flex flex-col items-start w-full my-4">
-      <label htmlFor="" className="w-full text-sm text-gray-400">
+    <div className="flex flex-col items-start w-full my-8">
+      <label htmlFor="" className="mb-2 w-full text-sm text-gray-400">
         {title}
       </label>
       {isTextArea ? (

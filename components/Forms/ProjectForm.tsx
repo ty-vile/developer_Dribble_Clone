@@ -1,11 +1,12 @@
 "use client";
 
 import { SessionInterface } from "@/types";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useState, useRef } from "react";
 import Image from "next/image";
 import FormField from "./FormField";
 import { categoryFilters } from "@/constants";
 import CustomMenu from "../CustomMenu";
+import CustomButton from "../Buttons/CustomButton";
 
 type ProjectFormProps = {
   type: string;
@@ -23,25 +24,60 @@ function ProjectForm({ type, session }: ProjectFormProps) {
     category: "",
   });
 
+  const imageUploadDivRef = useRef<null | HTMLDivElement>(null);
+
   const handleSubmit = (e: React.FormEvent) => {};
-  const handleChangeImage = (e: ChangeEvent<HTMLInputElement>) => {};
+  const handleChangeImage = (e: ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
+
+    const file = e.target.files?.[0];
+
+    if (!file) return;
+
+    console.log(imageUploadDivRef.current);
+
+    if (!file.type.includes("image")) {
+      return;
+    }
+
+    const reader = new FileReader();
+
+    reader.readAsDataURL(file);
+
+    reader.onload = () => {
+      const result = reader.result as string;
+
+      handleStateChange("image", result);
+    };
+  };
   const handleStateChange = (fieldName: string, value: string) => {
     setForm((prevState) => ({ ...prevState, [fieldName]: value }));
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col w-full ">
-      <div className="w-full border-4 h-40 flex items-center justify-center">
-        <label htmlFor="poster">{!form?.image && "Add a project poster"}</label>
-        <input
-          type="file"
-          id="image"
-          accept="image/*"
-          required={type === "create"}
-          onChange={handleChangeImage}
-          className=""
-        />
-        {form?.image && (
+    <form
+      onSubmit={handleSubmit}
+      className="flex-col w-full  px-6 pt-6 gap-10 text-lg max-w-5xl mx-auto"
+    >
+      <div
+        ref={imageUploadDivRef}
+        className="w-full lg:min-h-[300px] min-h-[200px] relative border-4 flex flex-col items-center justify-center"
+      >
+        {!form?.image ? (
+          <>
+            <label htmlFor="poster" className="text-lg font-semibold">
+              {!form?.image && "Add a project poster"}
+            </label>
+            <input
+              type="file"
+              id="image"
+              accept="image/*"
+              required={type === "create"}
+              onChange={handleChangeImage}
+              className="p-2 text-sm flex flex-col"
+            />
+          </>
+        ) : (
           <Image
             src={form?.image}
             className="sm:p-10 object-contain z-20"
@@ -76,12 +112,6 @@ function ProjectForm({ type, session }: ProjectFormProps) {
         placeholder="Project Name"
         setState={(value) => handleStateChange("githubUrl", value)}
       />
-      <FormField
-        title="Title"
-        state={form.title}
-        placeholder="Project Name"
-        setState={(value) => handleStateChange("title", value)}
-      />
 
       <CustomMenu
         title="Category"
@@ -90,8 +120,19 @@ function ProjectForm({ type, session }: ProjectFormProps) {
         setState={(value) => handleStateChange("category", value)}
       />
 
-      <div className="flex items-start w-full">
-        <button>Create</button>
+      <div className="mt-10 flex items-start w-full">
+        <CustomButton
+          title={
+            isSubmitting
+              ? `${type === "create" ? "Creating" : "Editing"}`
+              : `${type === "create" ? "Create" : "Edit"}`
+          }
+          type="submit"
+          leftIcon={isSubmitting ? "" : "/plus.svg"}
+          isSubmitting={isSubmitting}
+          bgColor="bg-purple-500"
+          textColor="text-white"
+        />
       </div>
     </form>
   );

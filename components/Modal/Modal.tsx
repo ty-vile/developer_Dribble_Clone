@@ -25,13 +25,13 @@ function Modal({ children }: { children: ReactNode }) {
   return (
     <div
       ref={overlay}
-      className="fixed z-100 top-0 left-0 bg-black/80 h-screen w-screen"
+      className="fixed z-50 top-0 left-0 bg-black/80 h-screen w-screen"
       onClick={handleClick}
     >
       <button
         type="button"
         onClick={onDismiss}
-        className="absolute top-4 right-8 bg-purple-500 p-4 opacity-100 rounded-full hover:scale-95 transition-fast"
+        className="absolute z-100 top-4 right-8 bg-purple-500 p-4 opacity-100 rounded-full hover:scale-95 transition-fast"
       >
         <Image
           src="/close.svg"
@@ -42,7 +42,7 @@ function Modal({ children }: { children: ReactNode }) {
       </button>
       <div
         ref={wrapper}
-        className="flex justify-start items-center flex-col absolute h-[92%] w-full bottom-0 bg-white rounded-t-3xl lg:px-40 px-8 pt-14 pb-72 overflow-auto;"
+        className="flex justify-start items-center flex-col absolute h-[92%] w-full bottom-0 bg-white rounded-t-3xl lg:px-40 px-8 pt-14 pb-72 overflow-auto z-50"
       >
         {children}
       </div>

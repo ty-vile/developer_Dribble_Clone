@@ -10,14 +10,14 @@ type CustomMenuProps = {
 
 function CustomMenu({ title, state, filters, setState }: CustomMenuProps) {
   return (
-    <div className="flex flex-col w-full gap-4 relative">
-      <label htmlFor={title} className="w-full">
+    <div className="flex flex-col w-full  relative">
+      <label htmlFor={title} className="w-full text-sm text-gray-400 mb-2">
         {title}
       </label>
       <Menu as="div" className="relative">
-        <div className="flex items-center justify-between p-2 bg-gray-100 w-[200px]">
-          <Menu.Button className="flex items-center justify-between w-full">
-            {state || "Select a category"}{" "}
+        <div className="flex items-center justify-between p-2 bg-gray-100 w-[200px] rounded-md ">
+          <Menu.Button className="flex items-center justify-between w-full text-gray-400">
+            {state || "Select a category"}
             <Image
               src="/arrow-down.svg"
               width={10}
@@ -26,7 +26,7 @@ function CustomMenu({ title, state, filters, setState }: CustomMenuProps) {
             />
           </Menu.Button>
         </div>
-        <Menu.Items className="flex justify-start w-[200px] gap-4 h-40 overflow-y-scroll  items-start flex-col ">
+        <Menu.Items className="flex justify-start w-[200px] gap-4 h-32 overflow-y-scroll shadow-md items-start flex-col">
           {filters.map((filter) => (
             <Menu.Item key={filter} className="p-2">
               <button
