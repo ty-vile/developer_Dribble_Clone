@@ -29,3 +29,12 @@ export interface UserProfile {
   githubUrl: string | null;
   linkedinUrl: string | null;
 }
+
+export interface ProjectForm {
+  title: string;
+  description: string;
+  image: string;
+  liveSiteUrl: string;
+  githubUrl: string;
+  category: string;
+}

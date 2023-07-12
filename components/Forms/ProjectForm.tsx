@@ -1,12 +1,19 @@
 "use client";
 
-import { SessionInterface } from "@/types";
-import { ChangeEvent, useState, useRef } from "react";
+// next/react
+import { ChangeEvent, useState } from "react";
 import Image from "next/image";
+// ts
+import { SessionInterface } from "@/types";
+// components
 import FormField from "./FormField";
-import { categoryFilters } from "@/constants";
 import CustomMenu from "../CustomMenu";
 import CustomButton from "../Buttons/CustomButton";
+// data
+import { categoryFilters } from "@/constants";
+// functions
+import { createNewProject, fetchToken } from "@/lib/actions";
+import { useRouter } from "next/navigation";
 
 type ProjectFormProps = {
   type: string;
@@ -24,17 +31,34 @@ function ProjectForm({ type, session }: ProjectFormProps) {
     category: "",
   });
 
-  const imageUploadDivRef = useRef<null | HTMLDivElement>(null);
+  const router = useRouter();
 
-  const handleSubmit = (e: React.FormEvent) => {};
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    setIsSubmitting(true);
+
+    const { token } = await fetchToken();
+
+    try {
+      if (type === "create") {
+        await createNewProject(form, session?.user?.id, token);
+
+        router.push("/");
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   const handleChangeImage = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
 
     const file = e.target.files?.[0];
 
     if (!file) return;
-
-    console.log(imageUploadDivRef.current);
 
     if (!file.type.includes("image")) {
       return;
@@ -59,10 +83,7 @@ function ProjectForm({ type, session }: ProjectFormProps) {
       onSubmit={handleSubmit}
       className="flex-col w-full  px-6 pt-6 gap-10 text-lg max-w-5xl mx-auto"
     >
-      <div
-        ref={imageUploadDivRef}
-        className="w-full lg:min-h-[300px] min-h-[200px] relative border-4 flex flex-col items-center justify-center"
-      >
+      <div className="w-full lg:min-h-[300px] min-h-[200px] relative border-4 flex flex-col items-center justify-center">
         {!form?.image ? (
           <>
             <label htmlFor="poster" className="text-lg font-semibold">
