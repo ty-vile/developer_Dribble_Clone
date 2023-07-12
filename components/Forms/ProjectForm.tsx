@@ -43,7 +43,6 @@ function ProjectForm({ type, session }: ProjectFormProps) {
     try {
       if (type === "create") {
         await createNewProject(form, session?.user?.id, token);
-
         router.push("/");
       }
     } catch (error) {
