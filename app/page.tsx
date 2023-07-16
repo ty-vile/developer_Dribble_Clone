@@ -34,8 +34,8 @@ const Home = async () => {
       <section className="w-full relative  grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
         {projectsToDisplay?.map(({ node }: { node: ProjectInterface }) => (
           <ProjectCard
-            key={node.id}
-            id={node.id}
+            key={node?.id}
+            id={node?.id}
             image={node?.image}
             title={node?.title}
             name={node?.createdBy?.name}

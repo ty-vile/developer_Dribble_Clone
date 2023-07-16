@@ -1,3 +1,4 @@
+import RelatedProjects from "@/components/Project/RelatedProjects";
 import { getProjectDetails } from "@/lib/actions";
 import { getCurrentUser } from "@/lib/session";
 import { ProjectInterface } from "@/types";
@@ -20,7 +21,8 @@ const Project = async ({ params: { id } }: { params: { id: string } }) => {
     liveSiteUrl,
     githubUrl,
     category,
-    createdBy: { email, avatarUrl },
+    id: projectId,
+    createdBy: { email, avatarUrl, id: userId },
   } = result?.project;
 
   return (
@@ -58,6 +60,14 @@ const Project = async ({ params: { id } }: { params: { id: string } }) => {
               alt="Github Logo"
             />
           </Link>
+        </div>
+        <div className="h-2 my-8 bg-purple-500"></div>
+        <div className="">
+          <RelatedProjects
+            userId={userId}
+            projectId={projectId}
+            avatarUrl={avatarUrl}
+          />
         </div>
       </div>
     </section>

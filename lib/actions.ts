@@ -4,6 +4,7 @@ import {
   getUserQuery,
   projectsQuery,
   getProjectByIdQuery,
+  getProjectsOfUserQuery,
 } from "@/graphql";
 import { ProjectForm } from "@/types";
 import { GraphQLClient } from "graphql-request";
@@ -109,4 +110,9 @@ export const fetchAllProjects = async (
 export const getProjectDetails = (id: string) => {
   client.setHeader("x-api-key", apiKey);
   return makeGraphQLRequest(getProjectByIdQuery, { id });
+};
+
+export const getUserProjects = (id: string, last?: number) => {
+  client.setHeader("x-api-key", apiKey);
+  return makeGraphQLRequest(getProjectsOfUserQuery, { id });
 };

@@ -3,6 +3,7 @@
 import { useProviders } from "@/hooks/useProviders";
 import { signIn } from "next-auth/react";
 import { Provider } from "@/types";
+import CustomButton from "../Buttons/CustomButton";
 
 function AuthProviders() {
   const { providers } = useProviders();
@@ -11,9 +12,11 @@ function AuthProviders() {
     return (
       <div className="">
         {Object.values(providers).map((provider: Provider, i) => (
-          <button key={i} onClick={() => signIn(provider?.id)}>
-            {provider.id}
-          </button>
+          <CustomButton
+            key={i}
+            title="Sign In"
+            handleClick={() => signIn(provider?.id)}
+          />
         ))}
       </div>
     );
