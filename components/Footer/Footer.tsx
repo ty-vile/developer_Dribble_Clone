@@ -38,7 +38,7 @@ function Footer() {
     <footer className="p-4 flex flex-col">
       <section className="mb-10">
         <Image
-          src="logo-purple.svg"
+          src="/logo-purple.svg"
           width={115}
           height={40}
           alt="Company Logo"
