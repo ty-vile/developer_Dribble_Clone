@@ -5,6 +5,7 @@ import {
   projectsQuery,
   getProjectByIdQuery,
   getProjectsOfUserQuery,
+  deleteProjectMutation,
 } from "@/graphql";
 import { ProjectForm } from "@/types";
 import { GraphQLClient } from "graphql-request";
@@ -115,4 +116,9 @@ export const getProjectDetails = (id: string) => {
 export const getUserProjects = (id: string, last?: number) => {
   client.setHeader("x-api-key", apiKey);
   return makeGraphQLRequest(getProjectsOfUserQuery, { id });
+};
+
+export const deleteProject = (id: string, token: string) => {
+  client.setHeader("Authorization", `Bearer ${token}`);
+  return makeGraphQLRequest(deleteProjectMutation, { id });
 };

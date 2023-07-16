@@ -1,3 +1,4 @@
+import ProjectActions from "@/components/Project/ProjectActions";
 import RelatedProjects from "@/components/Project/RelatedProjects";
 import { getProjectDetails } from "@/lib/actions";
 import { getCurrentUser } from "@/lib/session";
@@ -28,7 +29,14 @@ const Project = async ({ params: { id } }: { params: { id: string } }) => {
   return (
     <section className="p-4  w-full flex flex-col items-center h-fit">
       <div className="w-full max-w-4xl">
-        <h1 className="my-4 text-4xl font-bold">{title}</h1>
+        <div className="w-full flex items-center justify-between">
+          <h1 className="my-4 text-4xl font-bold">{title}</h1>
+          <div className="flex items-center justify-between gap-2">
+            {session?.user?.email === email && (
+              <ProjectActions projectId={projectId} />
+            )}
+          </div>
+        </div>
         <div className="mb-4 border-4 border-black bg-purple-500 text-white w-fit px-3 py-2 rounded-lg">
           {category}
         </div>

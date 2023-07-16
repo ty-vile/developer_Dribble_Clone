@@ -6,7 +6,7 @@ type ProjectCardProps = {
   image: string;
   title: string;
   name?: string;
-  avatarUrl?: string;
+  avatarUrl: string;
   userId?: string;
 };
 

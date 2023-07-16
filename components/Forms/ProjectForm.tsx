@@ -45,6 +45,7 @@ function ProjectForm({ type, session }: ProjectFormProps) {
         await createNewProject(form, session?.user?.id, token);
 
         router.push("/");
+        router.refresh();
       }
     } catch (error) {
       console.log(error);
