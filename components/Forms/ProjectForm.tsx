@@ -4,7 +4,7 @@
 import { ChangeEvent, useState } from "react";
 import Image from "next/image";
 // ts
-import { ProjectInterface, SessionInterface } from "@/types";
+import { FormState, ProjectInterface, SessionInterface } from "@/types";
 // components
 import FormField from "./FormField";
 import CustomMenu from "../CustomMenu";
@@ -23,7 +23,7 @@ type ProjectFormProps = {
 
 function ProjectForm({ type, session, project }: ProjectFormProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [form, setForm] = useState({
+  const [form, setForm] = useState<FormState>({
     image: project?.image || "",
     title: project?.title || "",
     description: project?.description || "",

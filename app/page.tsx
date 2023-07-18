@@ -1,3 +1,4 @@
+import Categories from "@/components/Categories";
 import ProjectCard from "@/components/Project/ProjectCard";
 import { fetchAllProjects } from "@/lib/actions";
 import { ProjectInterface } from "@/types";
@@ -30,8 +31,8 @@ const Home = async () => {
 
   return (
     <section className="flex-start flex-col mb-16 p-4">
-      <h2>Categories</h2>
-      <section className="w-full relative  grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+      <Categories />
+      <section className="w-full relative  grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5  gap-8">
         {projectsToDisplay?.map(({ node }: { node: ProjectInterface }) => (
           <ProjectCard
             key={node?.id}

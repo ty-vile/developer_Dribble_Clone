@@ -5,7 +5,6 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { useRouter } from "next/navigation";
-import { revalidatePath } from "next/cache";
 
 const ProjectActions = ({ projectId }: { projectId: string }) => {
   const router = useRouter();

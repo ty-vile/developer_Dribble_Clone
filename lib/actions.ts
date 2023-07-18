@@ -116,7 +116,7 @@ export const getProjectDetails = (id: string) => {
 
 export const getUserProjects = (id: string, last?: number) => {
   client.setHeader("x-api-key", apiKey);
-  return makeGraphQLRequest(getProjectsOfUserQuery, { id });
+  return makeGraphQLRequest(getProjectsOfUserQuery, { id, last });
 };
 
 export const deleteProject = (id: string, token: string) => {
@@ -134,26 +134,24 @@ export const updateProject = async (
     return base64Regex.test(value);
   }
 
-  let newForm = { ...form };
+  let updatedForm = { ...form };
 
-  const isNewImage = isBase64DataURL(form?.image);
+  const isUploadingNewImage = isBase64DataURL(form.image);
 
-  if (isNewImage) {
-    const imageUrl = await uploadImage(form?.image);
+  if (isUploadingNewImage) {
+    const imageUrl = await uploadImage(form.image);
 
     if (imageUrl.url) {
-      newForm = {
-        ...form,
-        image: imageUrl.url,
-      };
+      updatedForm = { ...updatedForm, image: imageUrl.url };
     }
   }
 
+  client.setHeader("Authorization", `Bearer ${token}`);
+
   const variables = {
     id: projectId,
-    input: newForm,
+    input: updatedForm,
   };
 
-  client.setHeader("Authorization", `Bearer ${token}`);
   return makeGraphQLRequest(updateProjectMutation, variables);
 };

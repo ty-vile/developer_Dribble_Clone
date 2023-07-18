@@ -31,12 +31,11 @@ function ProjectCard({
       {/* project img section */}
       <Link
         href={`/project/${id}`}
-        className="flex items-center group relative w-full h-full rounded-2xl"
+        className="flex items-center group relative w-full h-[500px] rounded-2xl"
       >
         <Image
           src={image}
-          height={414}
-          width={314}
+          fill
           alt="Project Image"
           className="w-full h-full object-cover"
         />

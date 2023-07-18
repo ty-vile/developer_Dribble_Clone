@@ -1,6 +1,5 @@
 import { getUserProjects } from "@/lib/actions";
 import { UserProfile, ProjectInterface } from "@/types";
-import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import ProjectCard from "./ProjectCard";
@@ -16,9 +15,11 @@ const RelatedProjects = async ({
   projectId,
   avatarUrl,
 }: RelatedProjectProps) => {
-  const result = (await getUserProjects(userId)) as {
+  const result = (await getUserProjects(userId, 10)) as {
     user?: UserProfile;
   };
+
+  console.log(result?.user?.projects?.edges);
 
   const filteredProjects = result?.user?.projects?.edges?.filter(
     ({ node }: { node: ProjectInterface }) => node?.id !== projectId
