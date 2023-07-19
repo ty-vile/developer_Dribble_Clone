@@ -35,7 +35,7 @@ const FooterLink = ({ link, i }: FooterColumnLinkProps) => (
 
 function Footer() {
   return (
-    <footer className="p-4 flex flex-col">
+    <footer className="p-6 flex flex-col">
       <section className="mb-10">
         <Image
           src="/logo-purple.svg"

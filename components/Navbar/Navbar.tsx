@@ -12,7 +12,7 @@ const Navbar = async () => {
   const session = await getCurrentUser();
 
   return (
-    <nav className="flex items-center justify-between p-4 ">
+    <nav className="flex items-center justify-between p-6 ">
       <div className="flex flex-1 items-center justify-start gap-10">
         <Link href="/">
           <Image src="/logo.svg" width={115} height={45} alt="Flexibble logo" />
