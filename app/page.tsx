@@ -1,4 +1,5 @@
 import Categories from "@/components/Categories";
+import Pagination from "@/components/Pagination/Pagination";
 import ProjectCard from "@/components/Project/ProjectCard";
 import { fetchAllProjects } from "@/lib/actions";
 import { ProjectInterface } from "@/types";
@@ -6,26 +7,27 @@ import { type } from "os";
 
 type ProjectsSearch = {
   projectSearch: {
+    pageInfo: {
+      hasPreviousPage: boolean;
+      hasNextPage: boolean;
+      startCursor: string;
+      endCursor: string;
+    };
     edges: { node: ProjectInterface }[];
-  };
-  pageInfo: {
-    hasPreviousPage: boolean;
-    hasNextPage: boolean;
-    startCursor: string;
-    endCursor: string;
   };
 };
 
 type SearchParams = {
   category?: string;
+  endcursor?: string;
 };
 
 type Props = {
   searchParams: SearchParams;
 };
 
-const Home = async ({ searchParams: { category } }: Props) => {
-  const data = (await fetchAllProjects(category)) as ProjectsSearch;
+const Home = async ({ searchParams: { category, endcursor } }: Props) => {
+  const data = (await fetchAllProjects(category, endcursor)) as ProjectsSearch;
 
   const projectsToDisplay = data?.projectSearch?.edges || [];
 
@@ -60,7 +62,12 @@ const Home = async ({ searchParams: { category } }: Props) => {
           />
         ))}
       </section>
-      <h2>Load More</h2>
+      <Pagination
+        startCursor={data?.projectSearch?.pageInfo?.startCursor}
+        endCursor={data?.projectSearch?.pageInfo?.endCursor}
+        hasNextPage={data?.projectSearch?.pageInfo?.hasNextPage}
+        hasPreviousPage={data?.projectSearch?.pageInfo?.hasPreviousPage}
+      />
     </section>
   );
 };
