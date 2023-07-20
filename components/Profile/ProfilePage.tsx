@@ -1,6 +1,7 @@
 import { UserProfile } from "@/types";
 import Image from "next/image";
 import Link from "next/link";
+import RelatedProjects from "../Project/RelatedProjects";
 
 type Props = {
   user: UserProfile;
@@ -38,7 +39,7 @@ const ProfilePage = ({ user }: Props) => {
               View my awesome projects - and get in contact if you would like to
               work
             </h2>
-            <div className="flex items-center w-full gap-4 mt-6">
+            <div className="flex items-center w-full gap-4 mt-6 mb-6 lg:mb-0">
               <Link
                 href={githubUrl ? githubUrl : "https://github.com"}
                 className="p-3 bg-purple-300 w-fit rounded-full border-4 border-black"
@@ -63,6 +64,13 @@ const ProfilePage = ({ user }: Props) => {
           />
         </div>
       </div>
+
+      <div className="h-2 my-8 bg-purple-500"></div>
+      <RelatedProjects
+        userId={id}
+        projectId={projects?.edges[0]?.node?.id}
+        avatarUrl={avatarUrl}
+      />
     </div>
   );
 };
