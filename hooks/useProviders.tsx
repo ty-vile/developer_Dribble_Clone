@@ -9,8 +9,6 @@ export const useProviders = () => {
     const fetchProviders = async () => {
       const res = await getProviders();
 
-      console.log(res);
-
       setProviders(res);
     };
 

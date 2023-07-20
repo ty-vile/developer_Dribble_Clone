@@ -6,7 +6,7 @@ export type Provider = {
   type: string;
   signinUrl: string;
   callbackUrl: string;
-  singinUrlParams: Record<string, string> | null;
+  singinUrlParams?: Record<string, string> | null;
 };
 
 export type Providers = Record<string, Provider>;
