@@ -11,7 +11,7 @@ type FooterColumnProps = {
 
 type FooterColumnLinkProps = {
   link: string;
-  i: number;
+  key: number;
 };
 
 const FooterColumn = ({ title, links }: FooterColumnProps) => (
@@ -19,15 +19,15 @@ const FooterColumn = ({ title, links }: FooterColumnProps) => (
     <h3 className="font-semibold mb-4">{title}</h3>
     <ul className="flex flex-col gap-2">
       {links.map((link, i) => (
-        <FooterLink link={link} i={i} />
+        <FooterLink link={link} key={i} />
       ))}
     </ul>
   </div>
 );
 
-const FooterLink = ({ link, i }: FooterColumnLinkProps) => (
+const FooterLink = ({ link, key }: FooterColumnLinkProps) => (
   <li className="text-sm">
-    <Link href="/" key={i}>
+    <Link href="/" key={key}>
       {link}
     </Link>
   </li>
