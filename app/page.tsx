@@ -7,10 +7,10 @@ import { ProjectInterface } from "@/types";
 type ProjectsSearch = {
   projectSearch: {
     pageInfo: {
-      hasPreviousPage: boolean;
-      hasNextPage: boolean;
-      startCursor: string;
-      endCursor: string;
+      hasPreviousPage?: boolean;
+      hasNextPage?: boolean;
+      startCursor?: string;
+      endCursor?: string;
     };
     edges: { node: ProjectInterface }[];
   };
