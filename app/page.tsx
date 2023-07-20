@@ -26,10 +26,6 @@ type Props = {
 };
 
 const Home = async ({ searchParams: { category, endcursor } }: Props) => {
-  if (category === null || category || undefined) {
-    category = "";
-  }
-
   const data = (await fetchAllProjects(category, endcursor)) as ProjectsSearch;
 
   const projectsToDisplay = data?.projectSearch?.edges || [];
