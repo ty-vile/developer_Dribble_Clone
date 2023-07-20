@@ -3,7 +3,6 @@ import Pagination from "@/components/Pagination/Pagination";
 import ProjectCard from "@/components/Project/ProjectCard";
 import { fetchAllProjects } from "@/lib/actions";
 import { ProjectInterface } from "@/types";
-import { type } from "os";
 
 type ProjectsSearch = {
   projectSearch: {
