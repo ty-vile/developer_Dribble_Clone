@@ -7,10 +7,10 @@ import { ProjectInterface } from "@/types";
 type ProjectsSearch = {
   projectSearch: {
     pageInfo: {
-      hasPreviousPage?: boolean;
-      hasNextPage?: boolean;
-      startCursor?: string;
-      endCursor?: string;
+      hasPreviousPage: boolean;
+      hasNextPage: boolean;
+      startCursor: string;
+      endCursor: string;
     };
     edges: { node: ProjectInterface }[];
   };
@@ -26,15 +26,11 @@ type Props = {
 };
 
 const Home = async ({ searchParams: { category, endcursor } }: Props) => {
-  let data;
-
-  if (category) {
-    data = (await fetchAllProjects(category, endcursor)) as ProjectsSearch;
+  if (category === null || category || undefined) {
+    category = "";
   }
 
-  if (!category) {
-    data = (await fetchAllProjects()) as ProjectsSearch;
-  }
+  const data = (await fetchAllProjects(category, endcursor)) as ProjectsSearch;
 
   const projectsToDisplay = data?.projectSearch?.edges || [];
 

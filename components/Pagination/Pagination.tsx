@@ -4,10 +4,10 @@ import { useRouter } from "next/navigation";
 import CustomButton from "../Buttons/CustomButton";
 
 type Props = {
-  startCursor?: string;
-  endCursor?: string;
-  hasPreviousPage?: boolean;
-  hasNextPage?: boolean;
+  startCursor: string;
+  endCursor: string;
+  hasPreviousPage: boolean;
+  hasNextPage: boolean;
 };
 
 const Pagination = ({
