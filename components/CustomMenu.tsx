@@ -28,7 +28,7 @@ function CustomMenu({ title, state, filters, setState }: CustomMenuProps) {
         </div>
         <Menu.Items className="flex justify-start w-[200px] gap-4 h-32 overflow-y-scroll shadow-md items-start flex-col">
           {filters.map((filter) => (
-            <Menu.Item key={filter} className="p-2">
+            <Menu.Item key={filter}>
               <button
                 type="button"
                 value={filter}
