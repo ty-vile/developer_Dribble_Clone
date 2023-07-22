@@ -53,7 +53,7 @@ export const createUser = (name: string, email: string, avatarUrl: string) => {
 export const fetchToken = async () => {
   try {
     console.log(serverUrl);
-    const response = await fetch(`${serverUrl}/api/auth/token`);
+    const response = await fetch(`/api/auth/token`);
 
     return response.json();
   } catch (error) {
@@ -63,7 +63,7 @@ export const fetchToken = async () => {
 
 export const uploadImage = async (imagePath: string) => {
   try {
-    const response = await fetch(`${serverUrl}/api/upload`, {
+    const response = await fetch(`/api/upload`, {
       method: "POST",
       body: JSON.stringify({ path: imagePath }),
     });
